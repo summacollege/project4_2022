@@ -9,6 +9,9 @@ class Person extends Model
 {
     use HasFactory;
 
+    // every person has a user account and when user is created, person is created with same id
+    protected $guarded = [];
+
     public function pizzaPoint()
     {
         return $this->hasMany(PizzaPoint::class);
@@ -16,6 +19,6 @@ class Person extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id');
     }
 }

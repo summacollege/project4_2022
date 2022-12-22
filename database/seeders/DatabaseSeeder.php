@@ -18,19 +18,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        // Roles
+        // balie
+        $role = Role::create(['name' => 'balie']);
+        $permission = Permission::create(['name' => 'bestellingen afhandelen']);
+        $role->givePermissionTo($permission);
+        // bereiding
+        $role = Role::create(['name' => 'bereiding']);
+        $permission = Permission::create(['name' => 'keuken activiteiten']);
+        $role->givePermissionTo($permission);
+        // bezorger
+        $role = Role::create(['name' => 'bezorger']);
+        $permission = Permission::create(['name' => 'bezorgen']);
+        $role->givePermissionTo($permission);
+        // klant
+        $role = Role::create(['name' => 'klant']);
+        $permission = Permission::create(['name' => 'bestellen']);
+        $role->givePermissionTo($permission);
+        // management
+        $role = Role::create(['name' => 'management']);
+        $permission = Permission::create(['name' => 'management activiteiten']);
+        $role->givePermissionTo($permission);
+
+
         User::factory(10)->create();
 
         $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        // maak klant
-        $role = Role::create(['name' => 'customer']);
-        // klant mag producten zien
-        $permission = Permission::create(['name' => 'view products']);
-        $role->givePermissionTo($permission);
+        // kies klant role
+        $role = Role::where('name', 'klant')->first();
         // test user is klant
-        $user->assignRole('customer');
+        $user->assignRole('klant');
 
         $this->call([
             PersonSeeder::class,

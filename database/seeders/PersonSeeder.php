@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Person;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PersonSeeder extends Seeder
 {
@@ -15,6 +18,24 @@ class PersonSeeder extends Seeder
      */
     public function run()
     {
-        Person::factory(500)->create();
+        // Create a user with role admin
+        // admin
+        $role = Role::create(['name' => 'admin']);
+        $permission = Permission::create(['name' => 'admin']);
+        $role->givePermissionTo($permission);
+        $first = "admin";
+        $last = "";
+        $email = "admin@localhost";
+        $user = User::factory(['name' => $first, 'email' => $email])->create();
+        $user->assignRole('admin');
+        Person::factory(['first_name' => $first, 'last_name' => $last, 'id' => $user->id])->create();
+
+        $roles = ['balie', 'bereiding', 'bezorger', 'management'];
+
+        for($i = 0; $i < 500; $i++) {
+            $person = Person::factory()->create();
+            $role = fake()->optional($weight = 0.9, $default = 'klant')->randomElement($roles);
+            $person->user()->first()->assignRole($role);
+        }
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Person;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class PersonController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $persons = Person::orderBy('created_at', 'desc')->get();
-        return view('person.index', [
-            'persons' => $persons
+        $users = User::orderBy('created_at', 'desc')->get();
+        return view('user.index', [
+            'users' => $users
         ]);
     }
 
@@ -27,7 +27,7 @@ class PersonController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -44,10 +44,10 @@ class PersonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Person  $person
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Person $person)
+    public function show(User $user)
     {
         //
     }
@@ -55,10 +55,10 @@ class PersonController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Person  $person
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(Person $person)
+    public function edit(User $user)
     {
         //
     }
@@ -67,10 +67,10 @@ class PersonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Person  $person
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Person $person)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -78,10 +78,10 @@ class PersonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Person  $person
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Person $person)
+    public function destroy(User $user)
     {
         //
     }

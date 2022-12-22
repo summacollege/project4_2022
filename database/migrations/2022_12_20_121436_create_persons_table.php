@@ -18,13 +18,13 @@ return new class extends Migration
             // for customers and employees
             $table->string('first_name')->nullable();
             $table->string('last_name');
-            $table->string('zipcode')->nullable();
+            $table->string('postal_code')->nullable();
             // optional for customer
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('phone')->nullable();
-            $table->date('birth_date')->nullable();
+            $table->date('date_of_birth')->nullable();
             // customer email is created in the user table
             // employee email is created in the user table
             // personal email is for employees only
