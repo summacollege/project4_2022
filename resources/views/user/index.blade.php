@@ -1,7 +1,8 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="text-xl">Personen</div>
+    <div class="text-xl">Geregistreerde gebruikers</div>
+    <div class="text-sm">Klik op gebruiker om de rol te wijzigen</div>
     @canany(['manage activiteiten', 'admin'])
         @foreach ($users as $user)
             <div>

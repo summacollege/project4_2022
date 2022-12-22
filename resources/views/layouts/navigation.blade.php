@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @canany(['manage activiteiten', 'admin'])
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Users (geregistreerde gebruikers)') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('persons.index')" :active="request()->routeIs('persons.index')">
+                            {{ __('Personen') }}
+                        </x-nav-link>
+                    @endcanany
                 </div>
             </div>
 

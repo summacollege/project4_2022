@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class PersonController extends Controller
 {
@@ -60,7 +61,11 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        //
+        $roles = Role::all();
+        return view('person.edit', [
+            'person' => $person,
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -72,7 +77,10 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person)
     {
-        //
+        $user = $person->user;
+        $person->update($request->except('roles'));
+        $user->syncRoles($request->roles);
+        return redirect()->route('persons.index');
     }
 
     /**

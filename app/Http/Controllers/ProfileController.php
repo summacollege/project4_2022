@@ -38,6 +38,11 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
+        // the update triggers allso the update of the user's person
+        $person = $request->user()->person;
+        $person->update($request->validated());
+
+
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
