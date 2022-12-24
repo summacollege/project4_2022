@@ -56,7 +56,7 @@ require __DIR__.'/auth.php';
 
 
 
-
+// test routes
 // Voorbeeld van een model met een one-to-one relatie
 // en het gebruik van roles en permissions
 Route::get('test', function () {
@@ -76,17 +76,16 @@ Route::get('test3', function () {
 });
 
 
-// Eigen routes
+// Eigen routes (ideeën)
 // Voor de pizza's bijvoorbeeld(nog te maken):
-Route::middleware('auth')->group(function () {
-    // enkel personeel mag pizza's toevoegen, bewerken en verwijderen
-    // Route::resource('pizza', PizzaController::class)->except(['index', 'show']);
-    // enkel management mag personen bekijken, toevoegen, bewerken en verwijderen
-    // of dit gebeurt tijdens het aanmaken van een klant door een klant
-    // een klant mag enkel zichzelf bekijken en bewerken. geen andere klanten
-    // dus de route is altijd beschermd autorisatie moet gebeuren in de controller of in de views
-    // Dat gebeurt al hierboven in de middeleware role:management|admin
-});
+// enkel personeel mag pizza's toevoegen, bewerken en verwijderen
+// Route::resource('pizza', PizzaController::class)->except(['index', 'show']);
+// enkel management mag personen bekijken, toevoegen, bewerken en verwijderen
+// of dit gebeurt tijdens het aanmaken van een klant door een klant
+// een klant mag enkel zichzelf bekijken en bewerken. geen andere klanten
+// dus de route is altijd beschermd autorisatie moet gebeuren in de controller of in de views
+// Dat gebeurt al hierboven in de middeleware role:management|admin
+
 // pizza's mogen door iedereen bekeken worden
 // Route::resource('pizza', pizzaController::class)->only(['index', 'show']);
 // een klant mag zichzelf aanmaken zonder ingelogd te zijn
