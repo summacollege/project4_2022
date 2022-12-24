@@ -80,16 +80,15 @@ Route::get('test3', function () {
 // Voor de pizza's bijvoorbeeld(nog te maken):
 Route::middleware('auth')->group(function () {
     // enkel personeel mag pizza's toevoegen, bewerken en verwijderen
-    Route::resource('pizza', PizzaController::class)->except(['index', 'show']);
-    // enkel personeel mag personen toevoegen, bewerken en verwijderen
+    // Route::resource('pizza', PizzaController::class)->except(['index', 'show']);
+    // enkel management mag personen bekijken, toevoegen, bewerken en verwijderen
     // of dit gebeurt tijdens het aanmaken van een klant door een klant
-    Route::resource('person', PersonController::class);
     // een klant mag enkel zichzelf bekijken en bewerken. geen andere klanten
-    Route::resource('customer', CustomerController::class)->only(['show', 'edit', 'update']);
+    // dus de route is altijd beschermd autorisatie moet gebeuren in de controller of in de views
+    // Dat gebeurt al hierboven in de middeleware role:management|admin
 });
-// pizza mogen door iedereen bekeken worden
-Route::resource('pizza', pizzaController::class)->only(['index', 'show']);
+// pizza's mogen door iedereen bekeken worden
+// Route::resource('pizza', pizzaController::class)->only(['index', 'show']);
 // een klant mag zichzelf aanmaken zonder ingelogd te zijn
 // het aanmaken van een klant is in feite het aanmaken van een persoon
 // en het aanmaken van een gebruiker (user)
-Route::resource('customer', CustomerController::class)->only(['create', 'store']);

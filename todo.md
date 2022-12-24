@@ -1,0 +1,5 @@
+- pizza's crud
+- orders crud
+- uniform layout
+- all english language translated on the pages (ui)
+- tests

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Person;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -48,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        Person::factory(['first_name' => 'tester', 'last_name' => 'test', 'id' => $user->id])->create();
         // kies klant role
         $role = Role::where('name', 'klant')->first();
         // test user is klant
