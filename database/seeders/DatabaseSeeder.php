@@ -50,8 +50,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
         Person::factory(['first_name' => 'tester', 'last_name' => 'test', 'id' => $user->id])->create();
-        // kies klant role
-        $role = Role::where('name', 'klant')->first();
+        // kies klant role (voorbeeld)
+        // $role = Role::where('name', 'klant')->first();
         // test user is klant
         $user->assignRole('klant');
 
