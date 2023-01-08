@@ -40,7 +40,7 @@
                 <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
                     <h1>Logo</h1>
                 </div>
-
+                {{ $products[0] }}
                 <x-product-list/>
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">

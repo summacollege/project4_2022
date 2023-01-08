@@ -58,6 +58,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PersonSeeder::class,
             PizzaPointSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }

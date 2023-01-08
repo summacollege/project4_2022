@@ -7,6 +7,7 @@ use App\Models\Person;
 use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -26,7 +27,7 @@ Route::get('/', function () {
     // the component is defined in app\View\Components\ProductList.php
     // the component is rendered in the welcome view with the following line:
     // <x-product-list />
-    return view('welcome');
+    return view('welcome', ['products' => ['pizza', 'pasta', 'salad', 'dessert', 'drinks']]);
 });
 
 Route::get('/dashboard', function () {
@@ -53,21 +54,22 @@ Route::middleware(['role:management|admin'])->group(function () {
 require __DIR__.'/auth.php';
 
 
-
-
-
 // test routes
 // Voorbeeld van een model met een one-to-one relatie
 // en het gebruik van roles en permissions
+// hier wordt de mysql database gebruikt en niet de test omgeving
 Route::get('test', function () {
+    // maar één keer uitvoeren
     $role = Role::create(['name' => 'tester']);
     $permission = Permission::create(['name' => 'testen']);
     $role->givePermissionTo($permission);
     $user = User::first();
     $user->assignRole('tester');
+    dd($user);
 });
 Route::get('test2', function () {
-    $user = User::where('id', 14)->first();
+    // check desnoods in de db welke id te gebruiken
+    $user = User::where('id', 11)->first();
     dd($user->person);
 });
 Route::get('test3', function () {

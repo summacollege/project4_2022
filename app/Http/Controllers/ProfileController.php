@@ -40,8 +40,8 @@ class ProfileController extends Controller
 
         // the update triggers allso the update of the user's person
         $person = $request->user()->person;
-        $person->update($request->validated());
-
+        // in the person model there is no name and email field
+        $person->update($request->except('email', 'name'));
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

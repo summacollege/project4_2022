@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Person;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -12,21 +13,25 @@ class ProfileTest extends TestCase
 
     public function test_profile_page_is_displayed()
     {
-        $user = User::factory()->create();
+        // don't create user(standard test of breeze), create person instead
+        // $user = User::factory()->create();
+        // create person instead of user (user is co-created with person)
+        $person = Person::factory()->create();
+        $user = $person->user;
 
         $response = $this
             ->actingAs($user)
             ->get('/profile');
-
         $response->assertOk();
     }
 
     public function test_profile_information_can_be_updated()
     {
-        $user = User::factory()->create();
+        $person = Person::factory()->create();
+        $user = $person->user;
 
         $response = $this
-            ->actingAs($user)
+            ->actingAs($person->user)
             ->patch('/profile', [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
@@ -45,7 +50,8 @@ class ProfileTest extends TestCase
 
     public function test_email_verification_status_is_unchanged_when_the_email_address_is_unchanged()
     {
-        $user = User::factory()->create();
+        $person = Person::factory()->create();
+        $user = $person->user;
 
         $response = $this
             ->actingAs($user)
@@ -63,7 +69,8 @@ class ProfileTest extends TestCase
 
     public function test_user_can_delete_their_account()
     {
-        $user = User::factory()->create();
+        $person = Person::factory()->create();
+        $user = $person->user;
 
         $response = $this
             ->actingAs($user)
@@ -81,7 +88,8 @@ class ProfileTest extends TestCase
 
     public function test_correct_password_must_be_provided_to_delete_account()
     {
-        $user = User::factory()->create();
+        $person = Person::factory()->create();
+        $user = $person->user;
 
         $response = $this
             ->actingAs($user)
