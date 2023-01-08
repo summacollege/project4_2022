@@ -34,7 +34,8 @@ class PersonSeeder extends Seeder
 
         for($i = 0; $i < 500; $i++) {
             $person = Person::factory()->create();
-            $role = fake()->optional($weight = 0.9, $default = 'klant')->randomElement($roles);
+            // the role "klant" is the default role with 90% chance
+            $role = fake()->optional($weight = 0.1, $default = 'klant')->randomElement($roles);
             $person->user()->first()->assignRole($role);
         }
     }
