@@ -27,8 +27,9 @@ Route::get('/', function () {
     // the component is defined in app\View\Components\ProductList.php
     // the component is rendered in the welcome view with the following line:
     // <x-product-list />
-    return view('welcome', ['products' => ['pizza', 'pasta', 'salad', 'dessert', 'drinks']]);
+    return view('welcome',['products' => ['pizza', 'pasta', 'salad', 'dessert', 'drinks']]);
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
