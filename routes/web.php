@@ -4,6 +4,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\Person;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,10 @@ Route::get('/', function () {
     // the component is rendered in the welcome view with the following line:
     // <x-product-list />
     return view('welcome',['products' => ['pizza', 'pasta', 'salad', 'dessert', 'drinks']]);
+});
+
+Route::get('/home', function () {
+    return view('home',['products' => Product::all()]);
 });
 
 
