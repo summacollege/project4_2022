@@ -32,7 +32,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('home',['products' => Product::all()]);
+    return view('home',['products' => Product::all()],['users' => User::all()]);
 });
 
 
