@@ -7,17 +7,17 @@
     
     <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
       <a class="mr-5 hover:text-white">Pizza bestellen</a>
-      <a class="mr-5 hover:text-white">Second Link</a>
+      <a class="mr-5 hover:text-white">Bekijk Bestelling</a>
       <a class="mr-5 hover:text-white">Third Link</a>
       <a class="mr-5 hover:text-white">Track and Trace</a>
     </nav>
         
     @if (Auth::check())
     @foreach ($users  as $user)
-        @if (Auth::user()->id == $user->id)
-        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-          <span class="text-gray-700">{{ $user->name }}</span>
-      </button>
+    @if (Auth::user()->id == $user->id)
+    <a href="{{ route('dashboard') }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+        <span class="text-gray-700">{{ $user->name }}</span>
+    </a>
               </div>
         @endif
     @endforeach
