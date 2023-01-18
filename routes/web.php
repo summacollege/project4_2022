@@ -3,9 +3,11 @@
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\PizzaOrder;
 use App\Models\Person;
 use App\Models\Product;
 use App\Models\User;
+use Faker\Guesser\Name;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -35,10 +37,20 @@ Route::get('/home', function () {
     return view('home',['products' => Product::all()],['users' => User::all()]);
 });
 
+Route::get('/tracktrace', 'App\Http\Controllers\Pizzaordertracker@index')->name('tracktrace.overview')->middleware('auth');
+
+class Pizzaordertracker extends Controller {
+    public function index() {
+        return view('tracktrace', ['users' => User::all(),'pizza_orders'=> PizzaOrder::all()]);
+    }
+}
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
