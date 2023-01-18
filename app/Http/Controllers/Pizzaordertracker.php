@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\PizzaOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Pizzaordertracker extends Controller
 {
     public function index()
     {
-        $orders = PizzaOrder::all();
+        $user_id = auth()->id();
+        $orders = PizzaOrder::where('user_id', $user_id)->get();
         return view('pizza.index', compact('orders'));
     }
 
@@ -19,7 +21,7 @@ class Pizzaordertracker extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $validatedData = $request->validate([   
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'adress' => 'required|string',
