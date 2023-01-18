@@ -8,8 +8,7 @@
     <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
       <a class="mr-5 hover:text-white">Pizza bestellen</a>
       <a class="mr-5 hover:text-white">Bekijk Bestelling</a>
-      <a class="mr-5 hover:text-white">Third Link</a>
-      <a class="mr-5 hover:text-white">Track and Trace</a>
+      <a href="tracktrace" class="mr-5 hover:text-white">Track and Trace</a>
     </nav>
         
     @if (Auth::check())
