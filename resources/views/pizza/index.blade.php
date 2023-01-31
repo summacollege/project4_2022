@@ -68,7 +68,7 @@
                                     <span class="bg-green-500 text-xs rounded-full px-3 py-1 text-white">Delivered</span>
                                 @endif
                             </td>
-                            <td class="py-4 px-6">{{ $order->delivery_date }}</td>
+                            <td class="py-4 px-6">{{ $order->adress }}</td>
                         </tr>
                         @endforeach
                     @endif
