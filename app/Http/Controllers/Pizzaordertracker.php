@@ -9,9 +9,17 @@ class Pizzaordertracker extends Controller
 {
     public function index()
     {
+        if (Auth::user()->name == 'admin')
+        {
+            $orders = PizzaOrder::all();
+            return view('pizza.index', compact('orders'));            
+        }
+        else
+        {
         $user_id = auth()->id();
         $orders = PizzaOrder::where('user_id', $user_id)->get();
         return view('pizza.index', compact('orders'));
+        }
     }
 
     public function create()

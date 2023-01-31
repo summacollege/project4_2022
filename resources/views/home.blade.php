@@ -5,25 +5,40 @@
 <header class="text-gray-400 bg-gray-900 body-font">
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     
-    <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 hover:text-white">Pizza bestellen</a>
-      <a class="mr-5 hover:text-white">Bekijk Bestelling</a>
-      <a href="tracktrace" class="mr-5 hover:text-white">Track and Trace</a>
-    </nav>
+    @if(Auth::check() && Auth::user()->name == 'admin')
+  
+      <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
+        <a class="mr-5 hover:text-white">Admin acces</a>
         
+        <a class="mr-5 hover:text-white">Pizza aanmaken</a>
+
+        <a class="mr-5 hover:text-white">ingrediënten aanpassen</a>
+
+        <a href="tracktrace" class="mr-5 hover:text-white">Track and Trace</a>
+      </nav>
+    
+    @else
+    
+      <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
+        <a class="mr-5 hover:text-white">Pizza bestellen</a>
+        <a class="mr-5 hover:text-white">Bekijk Bestelling</a>
+        <a href="tracktrace" class="mr-5 hover:text-white">Track and Trace</a>
+      </nav>
+
+    @endif
+  
     @if (Auth::check())
     @foreach ($users  as $user)
     @if (Auth::user()->id == $user->id)
     <a href="{{ route('dashboard') }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
         <span class="text-gray-700">{{ $user->name }}</span>
     </a>
-              </div>
+             </div>
         @endif
     @endforeach
                 @else
                 <a href="{{ route('login') }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">Inloggen</a>    
     @endif
-
 
   </div>
 </header>

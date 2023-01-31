@@ -41,7 +41,7 @@ Route::get('/tracktrace', 'App\Http\Controllers\Pizzaordertracker@index')->name(
 
 class Pizzaordertracker extends Controller {
     public function index() {
-        return view('tracktrace', ['users' => User::all(),'pizza_orders'=> PizzaOrder::all()]);
+        return view('tracktrace', ['users' => User::all(),'pizza_orders'=> PizzaOrder::all(),['users' => User::all()]]);
     }
 }
 

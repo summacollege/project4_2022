@@ -47,4 +47,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Person::class, 'id', 'id');
     }
+
+    //check of het de admin is
+    
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 }
