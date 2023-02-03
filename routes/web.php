@@ -37,6 +37,14 @@ Route::get('/home', function () {
     return view('home',['products' => Product::all()],['users' => User::all()]);
 });
 
+
+Route::get('/bestelpagina', function () {
+    return view('pizza.bestelpagina', ['products' => Product::all()], ['users' => User::all()]);
+});
+
+
+
+
 Route::get('/tracktrace', 'App\Http\Controllers\Pizzaordertracker@index')->name('tracktrace.overview')->middleware('auth');
 
 class Pizzaordertracker extends Controller {
