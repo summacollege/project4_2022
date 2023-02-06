@@ -59,7 +59,7 @@ class Pizzaordertracker extends Controller {
     }
 
 }
-
+Route::get('pizza', 'App\Http\Controllers\Pizzaordertracker@index')->name('pizza.index');
 Route::delete('pizza/{id}', 'App\Http\Controllers\Pizzaordertracker@destroy')->name('pizza.destroy');
 
 

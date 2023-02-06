@@ -69,8 +69,7 @@ class Pizzaordertracker extends Controller
     {
         $order = PizzaOrder::find($id);
         $order->delete();
-        $order->save();
-        
+
         return redirect()->route('pizza.index')->with('success', 'De bestelling is verwijderd.');    
     }
     
