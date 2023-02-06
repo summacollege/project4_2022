@@ -52,7 +52,7 @@ class Pizzaordertracker extends Controller
         return redirect()->route('pizza.index')->with('success', 'Uw pizza word gemaakt');
     }
 
-    public function updateStatus(Request $request, $id)
+    public function updateOrderStatus(Request $request, $id)
     {
         $validatedData = $request->validate([
             'status' => 'required|string',
@@ -62,7 +62,7 @@ class Pizzaordertracker extends Controller
         $order->status = $validatedData['status'];
         $order->save();
 
-        return redirect()->route('pizza.index')->with('success', 'Uw pizza is onderweg');
+        return redirect()->back()->with('success', 'Bestellingstatus bijgewerkt.');
     }
 
     public function destroy($id)
