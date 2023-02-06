@@ -64,4 +64,15 @@ class Pizzaordertracker extends Controller
 
         return redirect()->route('pizza.index')->with('success', 'Uw pizza is onderweg');
     }
+
+    public function destroy($id)
+    {
+        $order = PizzaOrder::find($id);
+        $order->delete();
+        $order->save();
+        
+        return redirect()->route('pizza.index')->with('success', 'De bestelling is verwijderd.');    
+    }
+    
+
 }
