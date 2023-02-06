@@ -3,8 +3,11 @@
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\PizzaOrder;
 use App\Models\Person;
+use App\Models\Product;
 use App\Models\User;
+use Faker\Guesser\Name;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -27,12 +30,59 @@ Route::get('/', function () {
     // the component is defined in app\View\Components\ProductList.php
     // the component is rendered in the welcome view with the following line:
     // <x-product-list />
-    return view('welcome', ['products' => ['pizza', 'pasta', 'salad', 'dessert', 'drinks']]);
+    return view('welcome',['products' => ['pizza', 'pasta', 'salad', 'dessert', 'drinks']]);
 });
+
+Route::get('/home', function () {
+    return view('home',['products' => Product::all()],['users' => User::all()]);
+});
+
+
+Route::get('/bestelpagina', function () {
+    return view('pizza.bestelpagina', ['products' => Product::all()], ['users' => User::all()]);
+});
+
+
+Route::patch('pizza/{id}/update-status', 'App\Http\Controllers\PizzaOrderTracker@update')->name('update');
+
+
+Route::get('/tracktrace', 'App\Http\Controllers\Pizzaordertracker@index')->name('tracktrace.overview')->middleware('auth');
+
+
+Route::get('pizza', 'App\Http\Controllers\Pizzaordertracker@index')->name('pizza.index');
+
+Route::delete('pizza/{id}', 'App\Http\Controllers\Pizzaordertracker@destroy')->name('pizza.destroy');
+
+
+
+class Pizzaordertracker extends Controller {
+    public function index() {
+        return view('tracktrace', ['users' => User::all(),'pizza_orders'=> PizzaOrder::all(),['users' => User::all()]]);
+    }
+    public function destroy($id)
+    {
+        $order = PizzaOrder::find($id);
+        $order->delete();
+        return redirect()->route('App\Http\Controllers\Pizzaordertracker@index')->with('success', 'De bestelling is verwijderd.');    
+    }
+
+
+
+    
+    
+
+}
+
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
