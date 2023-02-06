@@ -8,11 +8,6 @@
     @if(Auth::check() && Auth::user()->name == 'admin')
   
       <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
-        <a class="mr-5 hover:text-white">Admin acces</a>
-        
-        <a class="mr-5 hover:text-white">Pizza aanmaken</a>
-
-        <a class="mr-5 hover:text-white">ingrediënten aanpassen</a>
 
         <a href="tracktrace" class="mr-5 hover:text-white">Track and Trace</a>
       </nav>
@@ -20,8 +15,7 @@
     @else
     
       <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
-        <a class="mr-5 hover:text-white">Pizza bestellen</a>
-        <a class="mr-5 hover:text-white">Bekijk Bestelling</a>
+
         <a href="tracktrace" class="mr-5 hover:text-white">Track and Trace</a>
       </nav>
 
@@ -69,6 +63,7 @@
                   <img src="{{ asset($product -> image) }} " class="w-full">
                   <h2 class="text-xl font-medium title-font text-white mt-5">{{ $product->name }}</h2>
                   <p class="text-base leading-relaxed mt-2">{{ $product->description }}</p>
+                  <p  class="text-base leading-relaxed mt-2">{{ $product->price }}</p>
               </div>
           @endforeach
       </div>

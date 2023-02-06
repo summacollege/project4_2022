@@ -43,15 +43,40 @@ Route::get('/bestelpagina', function () {
 });
 
 
+Route::patch('pizza/{id}/update-status', 'PizzaOrderTracker@updateOrderStatus')->name('updateOrderStatus');
 
 
 Route::get('/tracktrace', 'App\Http\Controllers\Pizzaordertracker@index')->name('tracktrace.overview')->middleware('auth');
+
+
+
+Route::get('pizza', 'App\Http\Controllers\Pizzaordertracker@index')->name('pizza.index');
+
+Route::delete('pizza/{id}', 'App\Http\Controllers\Pizzaordertracker@destroy')->name('pizza.destroy');
+
+
 
 class Pizzaordertracker extends Controller {
     public function index() {
         return view('tracktrace', ['users' => User::all(),'pizza_orders'=> PizzaOrder::all(),['users' => User::all()]]);
     }
+    public function destroy($id)
+    {
+        $order = PizzaOrder::find($id);
+        $order->delete();
+        return redirect()->route('App\Http\Controllers\Pizzaordertracker@index')->with('success', 'De bestelling is verwijderd.');    
+    }
+
+
+
+    
+    
+
 }
+
+
+
+
 
 
 Route::get('/dashboard', function () {

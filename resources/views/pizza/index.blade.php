@@ -18,49 +18,74 @@
                 
                 </form>
             </div>
-            
+            @if(Auth::check() && Auth::user()->name == 'admin')
+            <a href="home">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> Home</button>
+              </a>
+              
             <div class="overflow-x-auto mt-4">
                 <table class="w-full text-left table-collapse">
                     <thead class="bg-gray-800 text-white">
                         <tr>
-                            <th class="py-4 px-6">Order ID</th>
+                            <th class="py-4 px-6">Order id</th>
                             <th class="py-4 px-6">Name</th>
-                            <th class="py-4 px-6">Pizza</th>
+                            <th class="py-4 px-6">Pizza</th>    
                             <th class="py-4 px-6">Status</th>
                             <th class="py-4 px-6">Adress</th>
+                            <th class="py-4 px-6">Verwijderen</th>
                         </tr>
-                        <a href="home">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> Home</button>
-                          </a>
                     </thead>
-                    <tbody>
-
-                        @if(Auth::check() && Auth::user()->name == 'admin')
                         @foreach($orders as $order)
                         <tr>
                             <td class="py-4 px-6">{{ $order->id }}</td>
                             <td class="py-4 px-6">{{ $order->first_name }} {{ $order->last_name }}</td>
                             <td class="py-4 px-6">{{ $order->pizza }}</td>
                             <td class="py-4 px-6">
-                                @if ($order->status == 'pending')
-                                    <span class="bg-yellow-500 text-xs rounded-full px-3 py-1 text-white">Pending</span>
-                                @elseif ($order->status == 'in_progress')
-                                    <span class="bg-blue-500 text-xs rounded-full px-3 py-1 text-white">In Progress</span>
-                                @else
-                                    <span class="bg-green-500 text-xs rounded-full px-3 py-1 text-white">Delivered</span>
-                                @endif
+                                <form action="{{ route('updateOrderStatus', $order->id) }}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+                                    <select name="status" onchange="this.form.submit()">
+                                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="in_progress" {{ $order->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                                        <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                    </select>   
+                                </form>
                             </td>
+                              
                             <td class="py-4 px-6">{{ $order->adress }}</td>
-                        </tr>
+                            <td>
+                                <form action="{{ route('pizza.destroy', $order->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Verwijderen</button>
+                                </form> 
                         @endforeach
+                        
                     @else
+                </tr>
+                <a href="home">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"> Home</button>
+                  </a>
+            </thead>
+            <tbody>
+                <div class="overflow-x-auto mt-4">
+                    <table class="w-full text-left table-collapse">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="py-4 px-6">Name</th>
+                                <th class="py-4 px-6">Pizza</th>    
+                                <th class="py-4 px-6">Status</th>
+                                <th class="py-4 px-6">Adress</th>
+                                <th class="py-4 px-6">Verwijderen</th>
+                            </tr>
+                        </thead>
+
                         @foreach($orders as $order)
                         <tr>
-                            <td class="py-4 px-6">{{ $order->id }}</td>
                             <td class="py-4 px-6">{{ $order->first_name }} {{ $order->last_name }}</td>
                             <td class="py-4 px-6">{{ $order->pizza }}</td>
                             <td class="py-4 px-6">
-                                @if ($order->status == 'pending')
+                                @if ($order->status == '    pending')
                                     <span class="bg-yellow-500 text-xs rounded-full px-3 py-1 text-white">Pending</span>
                                 @elseif ($order->status == 'in_progress')
                                     <span class="bg-blue-500 text-xs rounded-full px-3 py-1 text-white">In Progress</span>
@@ -69,8 +94,15 @@
                                 @endif
                             </td>
                             <td class="py-4 px-6">{{ $order->adress }}</td>
-                        </tr>
-                        @endforeach
+                            <td>
+                                <form action="{{ route('pizza.destroy', $order->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Verwijder uw bestelling</button>
+                                    
+                                </form>
+                            </td>
+                        @endforeach 
                     @endif
                                     
                     </tbody>
