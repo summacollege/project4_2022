@@ -53,6 +53,13 @@
                                 @endif
                             </td>
                             <td class="py-4 px-6">{{ $order->adress }}</td>
+                            <td>
+                                <form action="{{ route('pizza.destroy', $order->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Verwijderen</button>
+                                    
+                                </form>
                         </tr>
                         @endforeach
                     @else
@@ -71,7 +78,6 @@
                                 @endif
                             </td>
                             <td class="py-4 px-6">{{ $order->adress }}</td>
-                            
                             <td>
                                 <form action="{{ route('pizza.destroy', $order->id) }}" method="POST">
                                     @csrf
@@ -80,6 +86,7 @@
                                     
                                 </form>
                             </td>
+                        
 
                         </tr>
                         @endforeach 
