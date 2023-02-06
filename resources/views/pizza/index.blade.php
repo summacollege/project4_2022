@@ -95,7 +95,7 @@
                                 <form action="{{ route('pizza.destroy', $order->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit">Verwijderen</button>
+                                    <button type="submit">Verwijder uw bestelling</button>
                                     
                                 </form>
                             </td>
