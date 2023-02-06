@@ -69,6 +69,7 @@
                   <img src="{{ asset($product -> image) }} " class="w-full">
                   <h2 class="text-xl font-medium title-font text-white mt-5">{{ $product->name }}</h2>
                   <p class="text-base leading-relaxed mt-2">{{ $product->description }}</p>
+                  <p  class="text-base leading-relaxed mt-2">{{ $product->price }}</p>
               </div>
           @endforeach
       </div>
