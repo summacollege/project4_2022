@@ -43,11 +43,10 @@ Route::get('/bestelpagina', function () {
 });
 
 
-Route::patch('pizza/{id}/update-status', 'PizzaOrderTracker@updateOrderStatus')->name('updateOrderStatus');
+Route::patch('pizza/{id}/update-status', 'App\Http\Controllers\PizzaOrderTracker@update')->name('update');
 
 
 Route::get('/tracktrace', 'App\Http\Controllers\Pizzaordertracker@index')->name('tracktrace.overview')->middleware('auth');
-
 
 
 Route::get('pizza', 'App\Http\Controllers\Pizzaordertracker@index')->name('pizza.index');

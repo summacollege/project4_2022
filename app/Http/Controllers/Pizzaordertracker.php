@@ -49,20 +49,16 @@ class Pizzaordertracker extends Controller
         $order->delivery_date = $validatedData['delivery_date'];
         $order->save();
 
-        return redirect()->route('pizza.index')->with('success', 'Uw pizza word gemaakt');
+        return redirect()->route('pizza.index')->with('succes', 'Uw pizza word gemaakt');
     }
 
-    public function updateOrderStatus(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'status' => 'required|string',
-        ]);
-
         $order = PizzaOrder::find($id);
-        $order->status = $validatedData['status'];
+        $order->status = $request->input('status');
         $order->save();
 
-        return redirect()->back()->with('success', 'Bestellingstatus bijgewerkt.');
+        return redirect()->route('pizza.index')->with('succes', 'De status is aangepast');
     }
 
     public function destroy($id)
@@ -70,7 +66,7 @@ class Pizzaordertracker extends Controller
         $order = PizzaOrder::find($id);
         $order->delete();
 
-        return redirect()->route('pizza.index')->with('success', 'De bestelling is verwijderd.');    
+        return redirect()->route('pizza.index')->with('succes', 'De bestelling is verwijderd.');    
     }
     
 

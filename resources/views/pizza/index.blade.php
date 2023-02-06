@@ -41,14 +41,15 @@
                             <td class="py-4 px-6">{{ $order->first_name }} {{ $order->last_name }}</td>
                             <td class="py-4 px-6">{{ $order->pizza }}</td>
                             <td class="py-4 px-6">
-                                <form action="{{ route('updateOrderStatus', $order->id) }}" method="post">
-                                    @csrf
-                                    @method('PATCH')
-                                    <select name="status" onchange="this.form.submit()">
-                                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                        <option value="in_progress" {{ $order->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                                        <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
-                                    </select>   
+                                <form action="{{ route('update', $order->id) }}" method="post">
+                                @method('PATCH')
+                                @csrf
+                                    <select name="status">
+                                        <option value="pending">Pending</option>
+                                        <option value="processing">Processing</option>
+                                        <option value="completed">Completed</option>
+                                    </select>
+                                    <button type="submit">Update</button>  
                                 </form>
                             </td>
                               
@@ -85,9 +86,9 @@
                             <td class="py-4 px-6">{{ $order->first_name }} {{ $order->last_name }}</td>
                             <td class="py-4 px-6">{{ $order->pizza }}</td>
                             <td class="py-4 px-6">
-                                @if ($order->status == '    pending')
+                                @if ($order->status == 'pending')
                                     <span class="bg-yellow-500 text-xs rounded-full px-3 py-1 text-white">Pending</span>
-                                @elseif ($order->status == 'in_progress')
+                                @elseif ($order->status == 'processing')
                                     <span class="bg-blue-500 text-xs rounded-full px-3 py-1 text-white">In Progress</span>
                                 @else
                                     <span class="bg-green-500 text-xs rounded-full px-3 py-1 text-white">Delivered</span>
